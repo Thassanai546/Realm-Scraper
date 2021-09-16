@@ -48,5 +48,31 @@ def player_search():
 
         print("\n")
 
+def recent_deaths():
+    # finds latest public deaths.
+    # TO BE ADDED: Class filter
+    maxed_stats = -1
+    while not int(maxed_stats) in range (0,9):
+        maxed_stats = input("Enter maxed stats (0-8): ")
+    data = fetch("https://www.realmeye.com/recent-deaths?ms=" + str(maxed_stats))
+    table = data.find("table", id="d")
+    recent_characters = table.find_all('tr')
+    
+    # finds 10 most recent deaths, private characters are not listed.
+    print("-------------------------------")
+    for index, row in enumerate(recent_characters[1:]):
+        td = row.find_all('td')
+        if td[1].text != "Private":
+            print(f"{td[1].text}, Base fame: {td[3].text}, {td[6].text} killed by: {td[7].text}")
+            # list items character had
+            items = td[5].find_all("span", class_="item")
+            for item in items:
+                title = item.get('title')
+                print(title)
+            print("\n")
+
+        if index == 10:
+            break
+
 if __name__ == "__main__":
-    player_search()
+    recent_deaths()
