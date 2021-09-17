@@ -1,4 +1,4 @@
-# Realm-Searcher
+# Realm-Searcher 🔍
 
 <img src="https://user-images.githubusercontent.com/72495327/133821946-8556ca4f-d3cd-45eb-9d8b-20f5a1fff025.gif" align=left>
 
