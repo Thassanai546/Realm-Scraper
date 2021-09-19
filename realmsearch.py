@@ -113,10 +113,14 @@ def recent_deaths():
 if __name__ == "__main__":
     option = -1
     while option != 0:
-        print("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n0 = Quit\n1 = Search for a player\n2 = Check recent character deaths\n+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+")
-        option = int(input())
-        
-        if option == 1:
-            player_search()
-        elif option == 2:
-            recent_deaths()
+        try:
+            print("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n0 = Quit\n1 = Search for a player\n2 = Check recent character deaths\n+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+")
+            option = int(input())
+            if option == 0:
+                print("Quitting...")
+            elif option == 1:
+                player_search()
+            elif option == 2:
+                recent_deaths()
+        except:
+            print("[!] Enter a number to select an option.")
