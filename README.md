@@ -8,7 +8,7 @@ This web scraper is powered by [Beautiful Soup](https://www.crummy.com/software/
 This is the first web scraper I have made since I started learning Python and Beautiful Soup.
 
 ### Work in progress
-+ Specific player graveyards
++ Specific player graveyards [Added !]
 + Weapon information
 
 # Realm of the Mad God 
