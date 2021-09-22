@@ -41,4 +41,6 @@ This is a screenshot of some of my characters on RealmEye. The gear displayed in
 <br><br>
 <img src="https://user-images.githubusercontent.com/72495327/134027255-29e5b6ec-2f60-4fea-afbb-41504632bb29.PNG">
 This screenshot shows me filtering the "Warrior" class and choosing 8 maxed stats (the power of the character). The result is that only 8/8 Warriors are shown as a result.
-
+<br><br>
+<img src="https://user-images.githubusercontent.com/72495327/134434839-3c70a4ba-a57a-4e88-9d5c-37adba0d67d2.PNG">
+Here I searched for a specific players graveyard. Stats like fame, exp, equipment and cause of death are shown. The exact date and time of the characters death is also shown.
