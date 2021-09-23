@@ -64,7 +64,7 @@ def player_graveyard():
         print("If their name is correct they may have chosen to hide their graveyard.")
         return
 
-    print(f"Graveyard of player {user}:\n")
+    print(f"Recent graveyard of player {user}:\n")
     for tr in graveyard_table_body[1:]:
         td = tr.find_all('td')
         print(f"Lvl: {td[3].text.strip()} {td[8].text.strip()} {td[2].text.strip()} died on {td[0].text.strip().replace('T',' ').replace('Z',' ')}[Base fame: {td[4].text.strip()}] [Total fame: {td[5].text.strip()}] [Exp: {td[6].text.strip()}]")
@@ -132,12 +132,26 @@ def recent_deaths():
             print(" ")
         if index == 10:
             break
-        
+
+def game_updates():
+    data = fetch('https://www.realmeye.com/wiki/realm-of-the-mad-god')
+    table_rows = data.find("table", {"table table-striped text-center"}).find("tbody").find_all('tr')
+    for row in table_rows:
+        print(row.text.strip())
+        print(" ")
+    
 if __name__ == "__main__":
+    menu = ("-------------------------------------\n"
+    "0 = Quit\n"
+    "1 = Search for a player\n"
+    "2 = Recent public character deaths\n"
+    "3 = Search for a players graveyard\n"
+    "4 = View stats about RotMG\n"
+    "-------------------------------------")
     option = -1
     while option != 0:
         try:
-            print("""+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n0 = Quit\n1 = Search for a player\n2 = Check recent character deaths\n3 = Search for a players graveyard\n+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+""")
+            print(menu)
             option = int(input())
             if option == 0:
                 print("Quitting...")
@@ -147,5 +161,7 @@ if __name__ == "__main__":
                 recent_deaths()
             elif option == 3:
                 player_graveyard()
+            elif option == 4:
+                game_updates()
         except:
             print("[!] Enter a number to select an option.")
