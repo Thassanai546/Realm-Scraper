@@ -44,3 +44,8 @@ This screenshot shows me filtering the "Warrior" class and choosing 8 maxed stat
 <br><br>
 <img src="https://user-images.githubusercontent.com/72495327/134434839-3c70a4ba-a57a-4e88-9d5c-37adba0d67d2.PNG">
 Here I searched for a specific players graveyard. Stats like fame, exp, equipment and cause of death are shown. The exact date and time of the characters death is also shown.
+<br><br>
+<img src="https://user-images.githubusercontent.com/72495327/134501817-3c4dd010-0729-44eb-a3fc-11d3263e2a2c.PNG">
+
+This is the terminal showing recent game news & the relevant links. Next to the terminal is the page on [RealmEye](https://www.realmeye.com/wiki/realm-of-the-mad-god) that I fetch recent game news from.
+
