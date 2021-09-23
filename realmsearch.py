@@ -3,10 +3,8 @@ import requests
 
 def fetch(url):
     # returns soup object of url
-    headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.84 Safari/537.36',
-    'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-    }
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.84 Safari/537.36',
+    'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',}
     page = requests.get(url, headers=headers).text
     soup = BeautifulSoup(page, "html.parser")
     return soup
@@ -94,64 +92,69 @@ def recent_deaths():
         "16":"Warrior",
         "17":"Wizard",
     }
-    print("--<>--<>--<>--<>--<>--<>--<>--<>--")
-    for key, value in char_classes.items():
-        print(key,':',value)
-    print("--<>--<>--<>--<>--<>--<>--<>--<>--")
+    try:
+        print("--<>--<>--<>--<>--<>--<>--<>--<>--")
+        for key, value in char_classes.items():
+            print(key,':',value)
+        print("--<>--<>--<>--<>--<>--<>--<>--<>--")
 
-    # user may only select 0 to 17
-    class_number = -1
-    while not int(class_number) in range (0,18):
-        class_number = input("Enter a class using their number (0 - 17): ")
-    print(f"You have chosen {char_classes[class_number]}")
+        # user may only select 0 to 17
+        class_number = -1
+        while not int(class_number) in range (0,18):
+            class_number = input("Enter a class using their number (0 - 17): ")
+        print(f"You have chosen {char_classes[class_number]}")
 
-    # user may only enter 0 to 8
-    maxed_stats = -1
-    while not int(maxed_stats) in range (0,9):
-        maxed_stats = input("Enter minimum number of maxed stats (0-8): ")
+        # user may only enter 0 to 8
+        maxed_stats = -1
+        while not int(maxed_stats) in range (0,9):
+            maxed_stats = input("Enter minimum number of maxed stats (0-8): ")
 
-    if char_classes[class_number] == "All":
-        # user wants to search all classes
-        data = fetch("https://www.realmeye.com/recent-deaths?ms=" + str(maxed_stats))
-        table = data.find("table", id="d")
-    else:
-        # user has searched for specific class
-        data = fetch("https://www.realmeye.com/recent-" + char_classes[class_number] + "-deaths?ms=" + str(maxed_stats))
-        table = data.find("table", id="d")
+        if char_classes[class_number] == "All":
+            # user wants to search all classes
+            data = fetch("https://www.realmeye.com/recent-deaths?ms=" + str(maxed_stats))
+            table = data.find("table", id="d")
+        else:
+            # user has searched for specific class
+            data = fetch("https://www.realmeye.com/recent-" + char_classes[class_number] + "-deaths?ms=" + str(maxed_stats))
+            table = data.find("table", id="d")
 
-    recent_characters = table.find_all('tr')
+        recent_characters = table.find_all('tr')
     
-    # finds 10 most recent deaths, private characters are not listed.
-    print(" ")
-    for index, row in enumerate(recent_characters[1:]):
-        td = row.find_all('td')
-        if td[1].text != "Private": # do not show private characters
-            print(f"{td[1].text}, Base fame: {td[3].text}, {td[6].text} killed by: {td[7].text}")
-            items = td[5].find_all("span", class_="item")
-            list_td(items)
-            print(" ")
-        if index == 10:
-            break
+    
+        # finds 10 most recent deaths, private characters are not listed.
+        print(" ")
+        for index, row in enumerate(recent_characters[1:]):
+            td = row.find_all('td')
+            if td[1].text != "Private": # do not show private characters
+                print(f"{td[1].text}, Base fame: {td[3].text}, {td[6].text} killed by: {td[7].text}")
+                items = td[5].find_all("span", class_="item")
+                list_td(items)
+                print(" ")
+            if index == 10:
+                break
+    except:
+        print("[!] Could not fetch recent deaths")
 
 def game_updates():
-    data = fetch('https://www.realmeye.com/wiki/realm-of-the-mad-god')
-    table_rows = data.find("table", {"table table-striped text-center"}).find("tbody").find_all('tr') # Find table with recent news
-    for row in table_rows:
-        print(row.text.strip()) # List new content added to the game
-        
-        row_url = row.find_all("a") # Find any links posted 
-        if row_url:
-            print("\nLinks:")
-        for link in row_url:
-            link_text = link["href"]
-            link_content = link.contents[0]
+    try:
+        data = fetch('https://www.realmeye.com/wiki/realm-of-the-mad-god')
+        table_rows = data.find("table", {"table table-striped text-center"}).find("tbody").find_all('tr') # Find table with recent news
+        for row in table_rows:
+            print(row.text.strip()) # List new content added to the game
             
-            if "/wiki/" in link_text: # Wiki links are relative. Adding realmeye URL so user can visit page.
-                print("https://www.realmeye.com" + link_text)
-            else:
-                print(f"{link_content} - {link_text}")
-
-        print(" ")
+            row_url = row.find_all("a") # Find any links posted 
+            if row_url:
+                print("\nLinks:")
+            for link in row_url:
+                link_text = link["href"]
+                link_content = link.contents[0]
+                if "/wiki/" in link_text: # Wiki links are relative. Adding realmeye URL so user can visit page.
+                    print("https://www.realmeye.com" + link_text)
+                else:
+                    print(f"{link_content} - {link_text}")
+            print(" ")
+    except:
+        print("[!] Could not fetch recent game news")
     
 if __name__ == "__main__":
     menu = ("-------------------------------------\n"
@@ -176,6 +179,6 @@ if __name__ == "__main__":
                 player_graveyard()
             elif option == 4:
                 game_updates()
-        except Exception as e:
+        except Exception as err:
             print("[!] Enter a number to select an option.")
-            print(e)
+            print(f"Error: {err}")
