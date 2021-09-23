@@ -135,9 +135,22 @@ def recent_deaths():
 
 def game_updates():
     data = fetch('https://www.realmeye.com/wiki/realm-of-the-mad-god')
-    table_rows = data.find("table", {"table table-striped text-center"}).find("tbody").find_all('tr')
+    table_rows = data.find("table", {"table table-striped text-center"}).find("tbody").find_all('tr') # Find table with recent news
     for row in table_rows:
-        print(row.text.strip())
+        print(row.text.strip()) # List new content added to the game
+        
+        row_url = row.find_all("a") # Find any links posted 
+        if row_url:
+            print("\nLinks:")
+        for link in row_url:
+            link_text = link["href"]
+            link_content = link.contents[0]
+            
+            if "/wiki/" in link_text: # Wiki links are relative. Adding realmeye URL so user can visit page.
+                print("https://www.realmeye.com" + link_text)
+            else:
+                print(f"{link_content} - {link_text}")
+
         print(" ")
     
 if __name__ == "__main__":
@@ -163,5 +176,6 @@ if __name__ == "__main__":
                 player_graveyard()
             elif option == 4:
                 game_updates()
-        except:
+        except Exception as e:
             print("[!] Enter a number to select an option.")
+            print(e)
