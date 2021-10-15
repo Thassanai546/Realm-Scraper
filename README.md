@@ -9,7 +9,7 @@ This is the first web scraper I have made since I started learning Python and Be
 
 ### Work in progress
 + Specific player graveyards [Added !]
-+ Ability to pay respects to fallen characters.
++ Ability to pay respects to fallen characters. [Added !]
 + Weapon information
 
 # Realm of the Mad God 
