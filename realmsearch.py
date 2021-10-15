@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
+import json
 
 def fetch(url):
     # returns soup object of url
@@ -15,6 +16,18 @@ def list_td(td):
         title = item.get('title')
         print(title)
 
+def respects_prompt():
+    # pay respect to fallen heroes and get an inspirational quote
+    if input("Press F to pay respects\nPress Enter to continue ").lower() == "f":
+        print("You pay respects to the fallen heroes...")
+        try:
+            response = requests.get("https://zenquotes.io/api/random")
+            json_data = json.loads(response.text)
+            quote = json_data[0]['q'] + " -" + json_data[0]['a']
+            print(quote)
+        except Exception as err:
+            print(err)
+    
 def player_search():
     user = input("Enter a user: ")
     site = "https://www.realmeye.com/player/" + user
@@ -132,6 +145,7 @@ def recent_deaths():
                 print(" ")
             if index == 10:
                 break
+        respects_prompt()
     except:
         print("[!] Could not fetch recent deaths")
 
