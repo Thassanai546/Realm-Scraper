@@ -35,7 +35,7 @@ On the left is a screenshot of the program where I searched for my own name. Fir
 
 Below the summary is a list of my characters and the gear that they have equipped. Next to the screenshot of the terminal is an in-game screenshot of my characters.
 
-<img src="https://user-images.githubusercontent.com/72495327/133826128-e95e995a-c2d8-43db-9643-8c59bd6fbd0c.png" width=400>
+<img src="https://user-images.githubusercontent.com/72495327/133826128-e95e995a-c2d8-43db-9643-8c59bd6fbd0c.png" width=385>
 <br><br>
 <img src="https://user-images.githubusercontent.com/72495327/133829111-bc2c36e5-6726-4787-9cb9-c75f4d5fb8a6.png">
 This is a screenshot of some of my characters on RealmEye. The gear displayed in the terminal matches the gear my characters have equipped.
