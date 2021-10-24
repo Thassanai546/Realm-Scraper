@@ -7,6 +7,9 @@ This web scraper is powered by [Beautiful Soup](https://www.crummy.com/software/
 
 This is the first web scraper I have made since I started learning Python and Beautiful Soup.
 
+[![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
+
+
 ### Work in progress
 + Specific player graveyards [Added !]
 + Ability to pay respects to fallen characters. [Added !]
